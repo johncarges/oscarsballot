@@ -1,0 +1,129 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  --main-gold: #C79F27;
+  --navbar-height: 70px;
+  --page-width: 550px;
+}
+
+body::-webkit-scrollbar { 
+  display: none;  /* Safari and Chrome */
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+.layout {
+  width: 100%;
+}
+
+.navbar-container {
+  background-color: var(--main-gold);
+  width: 100%;
+  height: var(--navbar-height);
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar {
+  width: var(--page-width);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.active {
+  text-decoration: underline !important;
+}
+.inactive {
+  text-decoration: none;
+}
+
+.navlink{
+  margin: 0rem .2rem;
+  padding:2rem;
+  font-size: larger;
+  color: black;
+
+}
+
+.page-container {
+  margin-top: var(--navbar-height);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+
+.ballot-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: var(--page-width);
+  padding: 2rem;
+  margin-bottom: var(--navbar-height)
+}
+
+
+
+.award-box {
+  border: solid 2px rgb(255, 255, 255)
+}
+
+h3 {
+  color: var(--main-gold)
+}
+
+.missing {
+  border: solid 2px rgb(232, 125, 123)
+}
+
+.nominee-box {
+  border-top: 1px solid #aaa;
+  padding: 1rem;
+}
+
+.nominee-box * {
+  margin: .2rem;
+}
+
+
+
+.selected {
+  background-color: var(--main-gold);
+}
+
+.ballot-submit-bar-container {
+  position: fixed;
+  bottom: 0;
+  left: 0; 
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: rgb(31, 31, 31);
+  height: var(--navbar-height)
+}
+
+.ballot-submit-bar {
+  width: var(--page-width);
+  text-align: end;
+}
+
+.ballot-submit-bar button {
+  margin-top: 1rem;
+  padding: .5rem;
+  border: 2px solid var(--main-gold);
+  border-radius:3px;
+  background-color: rgb(40,40,40);
+  color: white;
+  margin-right: 2.5rem;
+}
