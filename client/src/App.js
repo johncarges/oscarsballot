@@ -3,9 +3,11 @@ import {
   RouterProvider
 } from 'react-router-dom'
 
-import Ballot from './components/Ballot';
+import Ballot, {loader as ballotLoader} from './pages/ballot'
+import Admin, {loader as adminLoader} from './pages/admin'
 import Layout from './components/layout';
-
+import Auth from './components/auth';
+import Groups, {loader as groupsLoader} from './pages/groups'
 
 const router = createBrowserRouter([
   {
@@ -14,14 +16,25 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Ballot />
+        element: <Ballot />,
+        loader: ballotLoader
       },
       {
         path: '/groups',
-        element: <h1>Groups!</h1>,
+        element: <Groups />,
+        loader: groupsLoader,
+      },
+      {
+        path:'/admin',
+        element: <Admin />,
+        loader: adminLoader,
       }
     ]
   },
+  {
+    path: '/auth',
+    element: <Auth />
+  }
   
   
 ])

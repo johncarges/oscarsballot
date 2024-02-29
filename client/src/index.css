@@ -19,12 +19,73 @@ code {
     monospace;
 }
 
+@viewport {
+  width: device-width ;
+  zoom: 1.0 ;
+}
+
+
+/* UNIVERSAL */
+
+ul {
+  list-style: none;
+  padding-left: 0px
+}
+
+@media screen and (max-width:320px){
+  .page {
+    max-width: 500px;
+    padding: 10px 0px
+  }
+}
+
+.error-message {
+  height: 1rem;
+  font-style: italic;
+  font-size: small;
+  color:rgb(124, 2, 0)
+}
+/* PAGES */
+
+.auth-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.auth-page {
+  margin-top: var(--navbar-height)
+}
+
+.auth-page form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.auth-page input {
+  margin-bottom: 1rem;
+  padding: .5rem;
+  width: 100%
+}
+
+.auth-page button {
+  margin-top: 1rem;
+  padding: .5rem;
+  border: 2px solid var(--main-gold);
+  border-radius:3px;
+  background-color: white;
+  color: black;
+  margin-right: 2.5rem;
+}
 
 .layout {
   width: 100%;
 }
 
-.navbar-container {
+.navbar-container,
+.auth-banner {
   background-color: var(--main-gold);
   width: 100%;
   height: var(--navbar-height);
@@ -39,6 +100,16 @@ code {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+}
+
+.navbar button {
+  margin: 1.5rem 0rem .5rem 0rem;
+  padding: .5rem;
+  border: 2px solid var(--main-gold);
+  border-radius:3px;
+  background-color: white;
+  color: black;
+  margin-right: 2.5rem;
 }
 
 .active {
@@ -102,6 +173,10 @@ h3 {
   background-color: var(--main-gold);
 }
 
+.winner {
+  background-color: green
+}
+
 .ballot-submit-bar-container {
   position: fixed;
   bottom: 0;
@@ -126,4 +201,69 @@ h3 {
   background-color: rgb(40,40,40);
   color: white;
   margin-right: 2.5rem;
+}
+
+
+/* GROUP PAGE */
+
+.groups-page {
+  min-width: 350px
+}
+
+.groups-page > div {
+  border: 2px var(--main-gold) solid;
+  padding: .5rem;
+  margin: 1rem .5rem;
+}
+
+.group-search-result {
+  border: 1px solid black;
+  border-radius: 3px;
+  margin: 1rem 0rem;
+  padding: 0.5rem;
+}
+
+.group-list li {
+  /* padding: .5rem; */
+}
+
+.group-tile i {
+  width: 1rem;
+  padding-right: .25rem;
+}
+
+.group-name {
+  font-style:italic;
+}
+
+.group-tile table {
+  width: 100%
+}
+
+.group-search-result li {
+  font-size: small;
+}
+
+.groups-page button {
+  padding: .5rem;
+  border: 2px solid var(--main-gold);
+  border-radius:3px;
+  background-color: white;
+}
+
+.groups-page form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.groups-page input {
+  height: 1.5rem;
+  font-size: medium;
+  padding: .25rem;
+  margin: .25rem 0rem;
+}
+
+.join-group button {
+  margin-top: .5rem;
 }

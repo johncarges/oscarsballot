@@ -10,10 +10,12 @@ const AwardSchema = mongoose.Schema(
             type: [{name: String, film: String}],
             required: true
         },
-        winner: {name: String}
+        winner: String //id of winning nominee
     },
     {timestamps: true}
 )
+
+
 
  const Award = mongoose.model("Award", AwardSchema)
 

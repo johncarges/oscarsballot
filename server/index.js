@@ -1,15 +1,59 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
+const session = require('express-session')
+const MongoDBStore = require("connect-mongodb-session")(session)
+const router = express.Router()
 const User = require('./models/user.model.js')
 const Award = require('./models/award.model.js')
+const Group = require('./models/group.model.js')
 
 require('dotenv').config()
 // console.log(process.env.CONNECTION_STRING)
 
 const app = express()
+app.use(express.urlencoded({extended: true}))
 app.use(express.json())
-app.use(cors())
+
+const mongoDBStore = new MongoDBStore({
+    uri: process.env.CONNECTION_STRING,
+    collection: "mySessions"
+})
+
+// app.set("trust proxy", 1) 
+// app.use(session({
+//     name: 'session',
+//     secret: process.env.SESS_SECRET,
+//     // store: mongoDBStore,
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: {
+//         maxAge: 30000,
+//         sameSite: 'none',
+//         secure: false,
+//         httpOnly: 'auto',
+//     }
+// }))
+
+app.use(session({
+    secret: process.env.SESS_SECRET,  // a secret string used to sign the session ID cookie
+    resave: false,  // don't save session if unmodified
+    store: mongoDBStore,
+    unset: 'destroy',
+    saveUninitialized: false  // don't create session until something stored
+  }))
+
+app.use(cors({origin: ['http://localhost:3000'], methods: ["DELETE","POST", "PUT", "GET", "OPTIONS", "HEAD"], credentials: true}))
+
+
+app.get('/', (req, res)=>{
+    res.send('Hello from Node API')
+})
+
+app.use("/api/users", require("./routes/users.js"))
+app.use("/api/ballots", require("./routes/ballots.js"))
+app.use("/api/groups", require("./routes/groups.js"))
+app.use("/api/awards", require("./routes/awards.js"))
 
 const runServer = () => {
     app.listen(3009, ()=>{
@@ -17,66 +61,25 @@ const runServer = () => {
     })
 }
 
-app.get('/', (req, res)=>{
-    res.send('Hello from Node API')
+app.post('/login', (req, res) => {
+    const {username, password} = req.body
+    console.log(req.body)
+    req.session.user = {username: username}
+    res.status(200).json({msg:username})
 })
 
-app.get('/api/users', async (req, res) =>{
-    try {
-        const users = await User.find({},'username _id')
-        res.status(200).json(users)
-    } catch (error) {
-        res.status(500).json({message:error.message})
+const checkAuth = (req, res, next) => {
+    if (req.session.user) {
+        console.log(req.session.user)
+        next()
+    } else {
+        return res.status(422).json({msg:'not logged in'})
     }
-})
+}
 
-app.post('/api/users', async (req,res)=>{
-    try {
-        const user = await User.create(req.body)
-        res.status(201)
-        res.json(user)
-    } catch (error) {
-        res.status(500).json({message:error.message})
-    }
-})
-
-app.get('/api/users/:id', async (req, res)=>{
-    try {
-        const { id } = req.params
-        const user = await User.findById(id, 'username _id')
-        
-        res.status(200).json(user)
-
-
-    } catch (error) {
-        res.status(500).json({message: error.message})
-    }
-})
-
-app.put('/api/users/:id', async (req, res)=>{
-    try {
-        const { id } = req.params
-        const user = await User.findByIdAndUpdate(id, req.body)
-
-        if (!user) {
-            return res.status(404).json({message: 'User not found'})
-        }
-
-        const updatedUser = await User.findById(id, 'username _id')
-        res.status(200).json(updatedUser)
-    } catch (error) {
-        res.status(500).json({message: error.message})
-    }
-})
-
-app.delete('/api/users/:id', async (req, res) => {
-    try {
-        const { id } = req.params
-        const user = await User.findByIdAndDelete(id)
-        res.status(204)
-    } catch (error) {
-        res.status(500).json({message: error.message})
-    }
+app.get('/checkuser', checkAuth, (req, res) => {
+    console.log("/checkuser")
+    return res.status(200).json({msg: req.session.user.username})
 })
 
 
@@ -98,6 +101,9 @@ app.post('/api/awards', async (req, res) => {
         res.status(500).json({message: error.message})
     }
 })
+
+
+
 
 
 mongoose.connect(process.env.CONNECTION_STRING)
