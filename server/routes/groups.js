@@ -66,12 +66,12 @@ router.get("/findbyname", async (req, res)=> {
 })
 
 router.post("/", async (req, res)=> {
-    const { groupName } = req.body
     const user =  await req.session.user
-
+    
     if (!user) {
         return res.status(404).json({message: "Error: not found"})
     }
+    const { groupName } = req.body
 
     if (!groupName) {
         return res.status(400).json({message: "Group Name must be included"})

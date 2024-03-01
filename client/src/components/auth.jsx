@@ -47,22 +47,26 @@ export default function Auth() {
 
     }
 
-    const onSignup = (e) => {
+    const onSignup = async (e) => {
         e.preventDefault()
         const url = `https://oscarsballot.onrender.com/api/users/register`
         const body = JSON.stringify({'username':formData.signupUsername, 'password': formData.signupPassword})
 
-        fetch(url, {
+        const res = fetch(url, {
             method: "POST",
             body: body,
             headers: {
                 "content-type":"application/json",
                 "accepts":"application/json"
-            }
+            },
+            credentials: 'include'
         })
-        .then(r=>r.json())
-        .then(console.log)
-        .catch(console.log)
+        if (!res.ok) {
+            const message = await res.json()
+            console.log(message)
+        }
+        const data = await res.json()
+        navigate(destination)
     }
     
     // DELETE THIS:

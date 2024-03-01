@@ -48,7 +48,7 @@ export default function Groups() {
         const res = await fetch('https://oscarsballot.onrender.com/api/groups',{
             method: 'POST',
             headers: {'accepts':'application/json','content-type':'application/json'},
-            body: JSON.stringify({groupName: newGroupName}),
+            // body: JSON.stringify({groupName: newGroupName}),
             credentials: 'include'
         })
         if (!res.ok){
@@ -187,7 +187,6 @@ export const loader = async () => {
     const res = await fetch('https://oscarsballot.onrender.com/api/groups/mygroups',{
         headers: {'accepts':'application/json','content-type':'application/json'},
         credentials: 'include',
-        // credentials: 'same-origin'
     })
     if (!res.ok){
         return redirect("/auth?to=groups")
