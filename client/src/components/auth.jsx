@@ -28,7 +28,7 @@ export default function Auth() {
         e.preventDefault()
         const body = JSON.stringify({'username':formData.loginUsername, 'password': formData.loginPassword})
 
-        const res = await fetch('/api/users/login', { 
+        const res = await fetch('https://oscarsballot.onrender.com/api/users/login', { 
             method: "POST",
             body: body,
             headers: {
@@ -43,12 +43,8 @@ export default function Auth() {
             console.log(res.message)
         }
         const data = await res.json()
-        console.log({msg:'hi',...data})
         navigate(destination)
 
-        // .then(r=>r.json())
-        // .then(console.log)
-        // .catch(console.log)
     }
 
     const onSignup = (e) => {
