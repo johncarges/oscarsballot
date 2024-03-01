@@ -183,7 +183,7 @@ export const loader = async () => {
     
     const res = await fetch('https://oscarsballot.onrender.com/api/groups/mygroups',{
         headers: {'accepts':'application/json','content-type':'application/json'},
-        withCredentials: true,
+        credentials: 'include',
         // credentials: 'same-origin'
     })
     if (!res.ok){
