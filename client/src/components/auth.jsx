@@ -28,7 +28,7 @@ export default function Auth() {
         e.preventDefault()
         const body = JSON.stringify({'username':formData.loginUsername, 'password': formData.loginPassword})
 
-        const res = await fetch('/api/users/login', { 
+        const res = await fetch(`https://oscarsballot.onrender.com/api/users/login`, { 
             method: "POST",
             body: body,
             headers: {
@@ -68,7 +68,7 @@ export default function Auth() {
     // DELETE THIS:
     const checkButton = async (e) => {
 
-        const userRes = await fetch('/api/users/authchecker', { 
+        const userRes = await fetch('https://oscarsballot.onrender.com/api/users/authchecker', { 
             headers: {'content-type':'application/json', 
             'accepts':'application/json', 
             'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key',

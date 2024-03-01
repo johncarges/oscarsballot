@@ -141,7 +141,7 @@ export default function Ballot(){
 
 
 export async function loader(){
-    const userRes = await fetch('/api/users/authchecker', {
+    const userRes = await fetch('https://oscarsballot.onrender.com/api/users/authchecker', {
         headers: {'content-type':'application/json', 'accepts':'application/json'},
         credentials: 'include'
     })
