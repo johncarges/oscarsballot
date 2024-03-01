@@ -20,7 +20,7 @@ const mongoDBStore = new MongoDBStore({
     collection: "mySessions"
 })
 
-// app.set("trust proxy", 1) 
+app.set("trust proxy", 1) 
 // app.use(session({
 //     name: 'session',
 //     secret: process.env.SESS_SECRET,
@@ -42,7 +42,8 @@ app.use(session({
     unset: 'destroy',
     saveUninitialized: false,  // don't create session until something stored
     cookie: {
-        sameSite: 'none'
+        sameSite: 'none',
+        secure: true
     }
   }))
 
