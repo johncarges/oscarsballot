@@ -45,7 +45,7 @@ export default function Groups() {
             return null
         }
         
-        const res = await fetch('/api/groups',{
+        const res = await fetch('https://oscarsballot.onrender.com/api/groups',{
             method: 'POST',
             headers: {'accepts':'application/json','content-type':'application/json'},
             body: JSON.stringify({groupName: newGroupName})
@@ -84,7 +84,7 @@ export default function Groups() {
     const onSearchSubmit = async (e) => {
         e.preventDefault()
 
-        const res = await fetch(`/api/groups/findbyname?groupName=${searchTerms.groupName}&code=${searchTerms.code}`)
+        const res = await fetch(`https://oscarsballot.onrender.com/api/groups/findbyname?groupName=${searchTerms.groupName}&code=${searchTerms.code}`)
         if (!res.ok){
             const message = await res.json()
             setAddError(message)
@@ -103,7 +103,7 @@ export default function Groups() {
         }
         
 
-        const res = await fetch(`/api/groups/adduser/${searchResult._id}`,{
+        const res = await fetch(`https://oscarsballot.onrender.com/api/groups/adduser/${searchResult._id}`,{
             method: 'PATCH',
             headers: {'content-type':'application/json','accepts':'application/json'}
         })
@@ -169,7 +169,7 @@ export default function Groups() {
 }
 
 export const loader = async () => {
-    const userRes = await fetch('/api/users/authchecker', {
+    const userRes = await fetch('https://oscarsballot.onrender.com/api/users/authchecker', {
         headers: {'content-type':'application/json', 'accepts':'application/json'},
         credentials: 'include'
     })
@@ -181,7 +181,7 @@ export const loader = async () => {
     const userData = await userRes.json()
     
     
-    const res = await fetch('/api/groups/mygroups',{
+    const res = await fetch('https://oscarsballot.onrender.com/api/groups/mygroups',{
         headers: {'accepts':'application/json','content-type':'application/json'},
         withCredentials: true,
         // credentials: 'same-origin'

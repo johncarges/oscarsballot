@@ -49,7 +49,7 @@ export default function Auth() {
 
     const onSignup = (e) => {
         e.preventDefault()
-        const url = `/api/users/register`
+        const url = `https://oscarsballot.onrender.com/api/users/register`
         const body = JSON.stringify({'username':formData.signupUsername, 'password': formData.signupPassword})
 
         fetch(url, {
@@ -86,7 +86,7 @@ export default function Auth() {
     }
 
     const logOutButton = async (e) => {
-        fetch('/api/users/logout', {method: "POST"})
+        fetch('https://oscarsballot.onrender.com/api/users/logout', {method: "POST"})
     }
 
     return (

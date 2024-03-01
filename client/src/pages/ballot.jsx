@@ -30,7 +30,7 @@ export default function Ballot(){
             responses: responses
         }
 
-        const res = await fetch('/api/ballots',{
+        const res = await fetch('https://oscarsballot.onrender.com/api/ballots',{
             method: 'PATCH',
             headers: {'accepts':'application/json','content-type':'application/json'},
             body: JSON.stringify(body)
@@ -153,7 +153,7 @@ export async function loader(){
     }
     const userData = await userRes.json()
 
-    const awardsRes = await fetch('/api/awards',{
+    const awardsRes = await fetch('https://oscarsballot.onrender.com/api/awards',{
         headers: {'accepts':'application/json','content-type':'application/json'}
     })
     if (!awardsRes.ok){
