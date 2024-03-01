@@ -35,6 +35,7 @@ router.post("/register", async (req, res) =>{
                 // Add user info to session
                 const sessUser = {id:   newUser.id, username: newUser.username, responses: newUser.responses}
                 req.session.user = sessUser
+                req.session.save()
                 res.json({message: "Succesfully Registered", sessUser})
                 
             } catch (err) {

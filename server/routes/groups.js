@@ -67,7 +67,7 @@ router.get("/findbyname", async (req, res)=> {
 
 router.post("/", async (req, res)=> {
     const { groupName } = req.body
-    const user =  req.session.user
+    const user =  await req.session.user
 
     if (!user) {
         return res.status(404).json({message: "Error: not found"})
@@ -111,7 +111,7 @@ router.post("/", async (req, res)=> {
 router.patch("/adduser/:groupId", async (req, res) => {
     const {groupId} = req.params
     
-    const user = req.session.user
+    const user = await req.session.user
 
     if (!user) {
         return res.status(401).json({message: "Unauthorized"})

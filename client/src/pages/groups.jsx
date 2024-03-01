@@ -110,7 +110,8 @@ export default function Groups() {
             credentials: 'include'
         })
         if (!res.ok) {
-            console.log(res.json())
+            data = await res.json()
+            console.log(data)
             return null
         }
         const data = await res.json()
