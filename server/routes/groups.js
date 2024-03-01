@@ -34,7 +34,7 @@ router.get("/mygroups", async (req, res) => {
 
 
     const results = await Award.find({winner: {$ne: null}}, '_id winner').lean()
-    console.log(results)
+
     const groupObjects = myGroups.map(group=>{
         return formatGroup(group, results)
     })
@@ -118,16 +118,7 @@ router.patch("/adduser/:groupId", async (req, res) => {
     } 
 
     try {
-        // const group = await Group.findById(groupId)
         
-        // if (!group) return res.status(404).json({message: 'Group could not be found'})
-
-        // if (group.users.includes(user.id)) return res.status(400).json({message: "User already in group"})
-        
-        // await group.updateOne({$push: {users: user.id}}, {
-        //     new: true
-        // })
-        // await group.populate('users','username response')
         const group = await Group.findByIdAndUpdate(groupId,
             {$addToSet: {users: user.id}},
             {new: true}

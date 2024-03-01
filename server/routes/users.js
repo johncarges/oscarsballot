@@ -78,7 +78,8 @@ router.post("/login", (req, res)=> {
 
 router.post("/logout", async (req, res) => {
 
-    req.session = null
+    req.session.destroy()
+    // req.session = null
     res.status(204).json({message: "Logged Out Successfully"})
 
 })
