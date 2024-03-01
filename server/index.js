@@ -40,10 +40,13 @@ app.use(session({
     resave: false,  // don't save session if unmodified
     store: mongoDBStore,
     unset: 'destroy',
-    saveUninitialized: false  // don't create session until something stored
+    saveUninitialized: false,  // don't create session until something stored
+    cookie: {
+        sameSite: 'none'
+    }
   }))
 
-app.use(cors({origin: ['http://localhost:3000'], methods: ["DELETE","POST", "PUT", "GET", "OPTIONS", "HEAD"], credentials: true}))
+app.use(cors({origin: [process.env.CLIENT], methods: ["DELETE","POST", "PUT", "GET", "OPTIONS", "HEAD"], credentials: true}))
 
 
 app.get('/', (req, res)=>{
