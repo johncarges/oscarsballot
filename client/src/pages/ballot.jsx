@@ -33,7 +33,8 @@ export default function Ballot(){
         const res = await fetch('https://oscarsballot.onrender.com/api/ballots',{
             method: 'PATCH',
             headers: {'accepts':'application/json','content-type':'application/json'},
-            body: JSON.stringify(body)
+            body: JSON.stringify(body),
+            credentials: 'include'
         })
 
         if (!res.ok) {
