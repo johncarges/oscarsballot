@@ -10,7 +10,7 @@ export default function Navbar() {
     }
 
     const onLogout = async (e) => {
-        const res = await fetch('https://oscarsballot.onrender.com/api/users/logout',{method:'POST'})
+        const res = await fetch('https://oscarsballot.onrender.com/api/users/logout',{method:'POST', credentials: 'include'})
         if (!res.ok) console.log(res.json())
         navigate('/auth')
     }
