@@ -17,7 +17,6 @@ export default function Groups() {
     const [addError, setAddError] = useState(null)
     
     const expandGroup = (groupId) => {
-        console.log(groupId)
         setExpanded(groupId)
     }
 
@@ -42,7 +41,7 @@ export default function Groups() {
 
     const onSubmitNew = async (e) => {
         if (newGroupName===''){
-            console.log('Name must be included') // TEMP - SET ERROR
+            setAddError('Name must be included') // TEMP - SET ERROR
             return null
         }
         

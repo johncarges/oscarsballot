@@ -73,7 +73,7 @@ export default function Ballot(){
         return (
             <div key={award._id} className={awardClassName} >
                 <h3>{award.name}</h3>
-                <ul>
+                <div className='nominees'>
                     {award.nominees.map(nominee=>{
                         const style = selected[award._id] === nominee._id ? 'nominee-box selected' : 'nominee-box '
                         
@@ -94,7 +94,7 @@ export default function Ballot(){
                         }
                     
                     })}
-                </ul>
+                </div>
 
             </div>
         )
