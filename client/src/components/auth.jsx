@@ -86,7 +86,7 @@ export default function Auth() {
     }
 
     const logOutButton = async (e) => {
-        fetch('https://oscarsballot.onrender.com/api/users/logout', {method: "POST"})
+        fetch('https://oscarsballot.onrender.com/api/users/logout', {method: "POST", credentials: 'include'})
     }
 
     return (
