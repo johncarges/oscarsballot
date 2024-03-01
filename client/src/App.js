@@ -34,6 +34,10 @@ const router = createBrowserRouter([
   {
     path: '/auth',
     element: <Auth />
+  },
+  {
+    path: '/join-group',
+    element: <h1>Join Group</h1>
   }
   
   
