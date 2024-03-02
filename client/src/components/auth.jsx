@@ -5,6 +5,9 @@ export default function Auth() {
 
     const navigate = useNavigate()
 
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(null)
+
     const [searchParams, _] = useSearchParams()
     const destination = searchParams.get('to') === 'groups' ? '/groups' : '/'
 
@@ -28,6 +31,8 @@ export default function Auth() {
         e.preventDefault()
         const body = JSON.stringify({'username':formData.loginUsername, 'password': formData.loginPassword})
 
+        setLoading(true)
+
         const res = await fetch(`https://oscarsballot.onrender.com/api/users/login`, { 
             method: "POST",
             body: body,
@@ -40,7 +45,9 @@ export default function Auth() {
             credentials: 'include'
         })
         if (!res.ok) {
-            console.log(res.message)
+            setLoading(false)
+            const message = await res.json()
+            setError(message.message)
         }
         const data = await res.json()
         navigate(destination)
@@ -81,33 +88,35 @@ export default function Auth() {
             
         })
         if (!userRes.ok){
-            return redirect('/auth?to=ballot')
+            const message = await userRes.json()
+            setError(message.message)
         }
         const data = await userRes.json()
-        console.log(data)
-        
-        console.log(data)
+
     }
 
     const logOutButton = async (e) => {
         fetch('https://oscarsballot.onrender.com/api/users/logout', {method: "POST", credentials: 'include'})
     }
 
+    const buttonStyle = loading ? {color:'grey'} : {}
+
     return (
         <div className='auth-page-container'>
             <div className='auth-banner'></div>
             <div className='auth-page page'>
                 <h2>Login</h2>
+                {error && <p>{error}</p> }
                 <form onChange={onChange} onSubmit={onLogin}>
                     <input name='loginUsername' placeholder="username" value={formData.loginUsername}/>
                     <input name='loginPassword' placeholder="password" value={formData.loginPassword}/>
-                    <button type='submit'>Log In</button>
+                    <button type='submit' disabled={loading}>Log In</button>
                 </form>
                 <h2>Signup</h2>
                 <form name='signup' onChange={onChange} onSubmit={onSignup}> 
                     <input name='signupUsername' placeholder="username" value={formData.signupUsername}/>
                     <input name='signupPassword' placeholder="password" value={formData.signupPassword}/>
-                    <button type='submit'>Sign Up</button>
+                    <button type='submit' style={buttonStyle} disabled={loading}>Sign Up</button>
                 </form>
             </div>
             <button onClick={checkButton}>Check</button>
