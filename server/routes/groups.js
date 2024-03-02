@@ -65,7 +65,7 @@ router.get("/findbyname", async (req, res)=> {
 
 })
 
-router.post("/", async (req, res)=> {
+router.post("/", cors(), async (req, res)=> {
     const user =  await req.session.user
     
     if (!user) {
