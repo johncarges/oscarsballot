@@ -48,9 +48,8 @@ export default function Groups() {
         const res = await fetch('https://oscarsballot.onrender.com/api/groups',{
             method: 'POST',
             headers: {'accepts':'application/json',
-            'access-control-allow-credentials':'true',
             'content-type':'application/json'},
-            // body: JSON.stringify({groupName: newGroupName}),
+            body: JSON.stringify({groupName: newGroupName}),
             credentials: 'include'
         })
         if (!res.ok){
