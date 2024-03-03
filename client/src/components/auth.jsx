@@ -77,27 +77,27 @@ export default function Auth() {
     }
     
     // DELETE THIS:
-    const checkButton = async (e) => {
+    // const checkButton = async (e) => {
 
-        const userRes = await fetch('https://oscarsballot.onrender.com/api/users/authchecker', { 
-            headers: {'content-type':'application/json', 
-            'accepts':'application/json', 
-            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key',
-            'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS'},
-            credentials: 'include',
+    //     const userRes = await fetch('https://oscarsballot.onrender.com/api/users/authchecker', { 
+    //         headers: {'content-type':'application/json', 
+    //         'accepts':'application/json', 
+    //         'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key',
+    //         'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS'},
+    //         credentials: 'include',
             
-        })
-        if (!userRes.ok){
-            const message = await userRes.json()
-            setError(message.message)
-        }
-        const data = await userRes.json()
+    //     })
+    //     if (!userRes.ok){
+    //         const message = await userRes.json()
+    //         setError(message.message)
+    //     }
+    //     const data = await userRes.json()
 
-    }
+    // }
 
-    const logOutButton = async (e) => {
-        fetch('https://oscarsballot.onrender.com/api/users/logout', {method: "POST", credentials: 'include'})
-    }
+    // const logOutButton = async (e) => {
+    //     fetch('https://oscarsballot.onrender.com/api/users/logout', {method: "POST", credentials: 'include'})
+    // }
 
     const buttonStyle = loading ? {color:'grey'} : {}
 
@@ -119,8 +119,8 @@ export default function Auth() {
                     <button type='submit' style={buttonStyle} disabled={loading}>Sign Up</button>
                 </form>
             </div>
-            <button onClick={checkButton}>Check</button>
-            <button onClick={logOutButton}>Logout</button>
+            {/* <button onClick={checkButton}>Check</button>
+            <button onClick={logOutButton}>Logout</button> */}
         </div>
     )
 
