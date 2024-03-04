@@ -10,6 +10,9 @@ const Award = require("../models/award.model")
 router.post("/register", async (req, res) =>{
     const {username, password} = req.body
 
+    console.log(username)
+    console.log(password)
+
     if (!username || !password) {
         return res.status(400).json({message: "Please enter all fields"})
     }

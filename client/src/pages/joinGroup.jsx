@@ -33,8 +33,7 @@ export default function JoinGroup() {
     }
 
     const alreadyJoined = group.users.map(user=>user._id).includes(user._id)
-    console.log(group.users.map(user=>user._id))
-    console.log(user._id)
+
 
     return (
         <div className='join-groups-page'>

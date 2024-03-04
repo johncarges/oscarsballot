@@ -77,14 +77,13 @@ export default function Auth() {
             credentials: 'include'
         })
         if (!res.ok) {
-            const message = await res.json()
+            const {message} = await res.json()
             setSignupError(message)
             console.log(message)
             setLoading(false)
             return null
         }
         const data = await res.json()
-        console.log(data)
         navigate(destination)
     }
     
@@ -119,7 +118,7 @@ export default function Auth() {
         <div className='auth-page-container'>
             <div className='auth-banner'><h2>Oscar Ballot</h2></div>
             <div className='auth-page page'>
-                <div className='loading-overlay' style={{display: loadingStyle}}></div>
+                <div className='loading-overlay' style={{display: loadingStyle, height:'40px'}}></div>
                 <h2>Login</h2>
                 {loginError && <p className='error-message'>{loginError}</p> }
                 <form style={formStyle} onChange={onChange} onSubmit={onLogin}>
