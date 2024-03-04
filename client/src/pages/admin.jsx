@@ -22,7 +22,8 @@ export default function Admin(){
         const res = await fetch('https://oscarsballot.onrender.com/api/awards/addwinners',{
             method: 'PATCH',
             headers: {'accepts':'application/json','content-type':'application/json'},
-            body: JSON.stringify(body)
+            body: JSON.stringify(body),
+            credentials: 'include'
         })
 
         if (!res.ok) {
