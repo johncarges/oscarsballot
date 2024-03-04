@@ -3,6 +3,9 @@ const User = require('../models/user.model')
 
 module.exports = function numberCorrect(user, results) {
     
+    console.log(user)
+    console.log(results)
+
     // results[0]: {_id: (awardId), winner: (winning Nominee Id)}
     // user.responses[0]: {award: (awardId), response: (winning nominee Id)}
     // Need result._id === response.award AND result.winner === response.response
