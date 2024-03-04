@@ -85,7 +85,7 @@ router.post("/logout", async (req, res) => {
 router.get("/authchecker", async (req, res)=> {
     
     if (req.session.user) {
-        const sessUser = await User.findById(req.session.user)
+        const sessUser = await User.findById(req.session.user.id)
         const results = await Award.find({winner: {$ne: null}}, '_id winner').lean()
         const user = sessUser.toObject()
         user.correct = await numberCorrect(user, results)
