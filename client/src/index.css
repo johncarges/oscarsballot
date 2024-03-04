@@ -45,6 +45,12 @@ ul {
   font-size: small;
   color:rgb(124, 2, 0)
 }
+
+.clickable,
+button {
+  cursor: pointer;
+}
+
 /* PAGES */
 
 .auth-page-container {

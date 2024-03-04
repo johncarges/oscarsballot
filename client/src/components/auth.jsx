@@ -6,7 +6,8 @@ export default function Auth() {
     const navigate = useNavigate()
 
     const [loading, setLoading] = useState(false)
-    const [error, setError] = useState(null)
+    const [loginError, setLoginError] = useState(null)
+    const [signupError, setSignupError] = useState(null)
 
     const [searchParams, _] = useSearchParams()
     const destination = searchParams.get('to') === 'groups' ? '/groups' : '/'
@@ -47,7 +48,7 @@ export default function Auth() {
         if (!res.ok) {
             setLoading(false)
             const message = await res.json()
-            setError(message.message)
+            setLoginError(message.message)
         }
         const data = await res.json()
         navigate(destination)
@@ -70,6 +71,7 @@ export default function Auth() {
         })
         if (!res.ok) {
             const message = await res.json()
+            setSignUpError(message)
             console.log(message)
         }
         const data = await res.json()
@@ -106,13 +108,14 @@ export default function Auth() {
             <div className='auth-banner'></div>
             <div className='auth-page page'>
                 <h2>Login</h2>
-                {error && <p>{error}</p> }
+                {loginError && <p className='error-message'>{loginError}</p> }
                 <form onChange={onChange} onSubmit={onLogin}>
                     <input name='loginUsername' placeholder="username" value={formData.loginUsername}/>
                     <input name='loginPassword' placeholder="password" value={formData.loginPassword}/>
                     <button type='submit' disabled={loading}>Log In</button>
                 </form>
                 <h2>Signup</h2>
+                {signupError && <p className='error-message'>{signupError}</p> }
                 <form name='signup' onChange={onChange} onSubmit={onSignup}> 
                     <input name='signupUsername' placeholder="username" value={formData.signupUsername}/>
                     <input name='signupPassword' placeholder="password" value={formData.signupPassword}/>
