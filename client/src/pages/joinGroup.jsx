@@ -7,6 +7,7 @@ export default function JoinGroup() {
     const {group, user} = useLoaderData()
 
     console.log(group)
+    console.log(user)
 
     const navigate = useNavigate()
 
@@ -17,7 +18,7 @@ export default function JoinGroup() {
         //     return
         // }
         
-        const res = await fetch(`https://oscarsballot.onrender.com/api/groups/adduser/${group.id}`,{
+        const res = await fetch(`https://oscarsballot.onrender.com/api/groups/adduser/${group._id}`,{
             method: 'PATCH',
             headers: {'content-type':'application/json','accepts':'application/json'},
             credentials: 'include'
@@ -32,6 +33,8 @@ export default function JoinGroup() {
     }
 
     const alreadyJoined = group.users.map(user=>user._id).includes(user._id)
+    console.log(group.users.map(user=>user._id))
+    console.log(user._id)
 
     return (
         <div className='join-groups-page'>
