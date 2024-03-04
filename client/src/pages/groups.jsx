@@ -120,6 +120,7 @@ export default function Groups() {
         setMyGroups(prev => {
             return [...prev, data]
         })
+        setSearchResult(null)
     }
 
     const renderedSearchResult = searchResult 

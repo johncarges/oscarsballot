@@ -26,7 +26,7 @@ const router = createBrowserRouter([
         loader: groupsLoader,
       },
       {
-        path: '/groups:id',
+        path: '/groups/:id',
         element: <JoinGroup />,
         loader: joinGroupsLoader
       },
