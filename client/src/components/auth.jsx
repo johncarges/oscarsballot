@@ -71,7 +71,7 @@ export default function Auth() {
         })
         if (!res.ok) {
             const message = await res.json()
-            setSignUpError(message)
+            setSignupError(message)
             console.log(message)
         }
         const data = await res.json()
@@ -116,7 +116,7 @@ export default function Auth() {
                 </form>
                 <h2>Signup</h2>
                 {signupError && <p className='error-message'>{signupError}</p> }
-                <form name='signup' onChange={onChange} onSubmit={onSignup}> 
+                <form name='signup' onChange={onChange} onSubmit={onSignup} > 
                     <input name='signupUsername' placeholder="username" value={formData.signupUsername}/>
                     <input name='signupPassword' placeholder="password" value={formData.signupPassword}/>
                     <button type='submit' style={buttonStyle} disabled={loading}>Sign Up</button>
