@@ -23,6 +23,16 @@ router.get("/", async (req, res) => {
     return res.status(200).json(groups)
 })
 
+router.get("/:id", async (req, res) => {
+    const {id} = req.params
+    const group = await Group.findById(id)
+
+    if (!group) return res.status(404).json({message: 'Group could not be found'})
+
+    await group.populate('users', 'username')
+    return res.status(200).json({group: group})
+})
+
 router.get("/mygroups", async (req, res) => {
     const user = await req.session.user
 

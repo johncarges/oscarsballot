@@ -111,20 +111,20 @@ export default function Auth() {
 
     return (
         <div className='auth-page-container'>
-            <div className='auth-banner'></div>
+            <div className='auth-banner'><h2>Oscar Ballot</h2></div>
             <div className='auth-page page'>
                 <h2>Login</h2>
                 {loginError && <p className='error-message'>{loginError}</p> }
                 <form style={formStyle} onChange={onChange} onSubmit={onLogin}>
-                    <input name='loginUsername' placeholder="username" value={formData.loginUsername}/>
-                    <input name='loginPassword' placeholder="password" value={formData.loginPassword}/>
+                    <input name='loginUsername' placeholder="Username" value={formData.loginUsername}/>
+                    <input name='loginPassword' placeholder="Password" type='password' value={formData.loginPassword}/>
                     <button type='submit' style={buttonStyle} disabled={loading}>Log In</button>
                 </form>
-                <h2>Signup</h2>
+                <h2>New User?</h2>
                 {signupError && <p className='error-message'>{signupError}</p> }
-                <form name='signup' onChange={onChange} onSubmit={onSignup} > 
-                    <input name='signupUsername' placeholder="username" value={formData.signupUsername}/>
-                    <input name='signupPassword' placeholder="password" value={formData.signupPassword}/>
+                <form name='signup' onChange={onChange} onSubmit={onSignup} >
+                    <input name='signupUsername' placeholder="Username" value={formData.signupUsername} />
+                    <input name='signupPassword' placeholder="Password" type='text' onFocus={(e)=> e.target.type ='password'} value={formData.signupPassword}/>
                     <button type='submit' style={buttonStyle} disabled={loading}>Sign Up</button>
                 </form>
             </div>

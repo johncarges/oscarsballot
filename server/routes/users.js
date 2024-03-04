@@ -49,9 +49,6 @@ router.post("/register", async (req, res) =>{
 router.post("/login", (req, res)=> {
     const {username, password} = req.body
 
-    if (req.session.user){
-        console.log({login: req.session.user})
-    }
 
     if (!username || !password) {
         return res.status(400).json({message: "Please enter all fields", body: req.body})

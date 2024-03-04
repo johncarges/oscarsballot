@@ -149,7 +149,7 @@ export default function Groups() {
                     </ul>
                 </div>
             }
-            <div className='new-group-button'>
+            <div className='new-group-container'>
                 <h3>Create Group</h3>
                 <div className='error-message'>{addError}</div>
                 <div>
