@@ -86,6 +86,7 @@ router.get("/authchecker", async (req, res)=> {
     
     if (req.session.user) {
         const sessUser = await User.findById(req.session.user.id)
+        console.log(sessUser)
         if (!sessUser) {
             return res.status(404).json({message: 'User could not be found'})
         }
