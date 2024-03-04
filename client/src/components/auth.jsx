@@ -113,11 +113,13 @@ export default function Auth() {
 
     const buttonStyle = loading ? {color:'grey'} : {}
     const formStyle = loading ? {opacity: '70%'} : {}
+    const loadingStyle = loading ? 'block' : 'none'
 
     return (
         <div className='auth-page-container'>
             <div className='auth-banner'><h2>Oscar Ballot</h2></div>
             <div className='auth-page page'>
+                <div className='loading-overlay' style={{display: loadingStyle}}></div>
                 <h2>Login</h2>
                 {loginError && <p className='error-message'>{loginError}</p> }
                 <form style={formStyle} onChange={onChange} onSubmit={onLogin}>
