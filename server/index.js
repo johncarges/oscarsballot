@@ -21,19 +21,6 @@ const mongoDBStore = new MongoDBStore({
 })
 
 app.set("trust proxy", 1) 
-// app.use(session({
-//     name: 'session',
-//     secret: process.env.SESS_SECRET,
-//     // store: mongoDBStore,
-//     resave: false,
-//     saveUninitialized: false,
-//     cookie: {
-//         maxAge: 30000,
-//         sameSite: 'none',
-//         secure: false,
-//         httpOnly: 'auto',
-//     }
-// }))
 
 app.use(session({
     secret: process.env.SESS_SECRET,  // a secret string used to sign the session ID cookie
@@ -47,7 +34,7 @@ app.use(session({
     }
   }))
 
-app.use(cors({origin: [process.env.CLIENT], methods: ["DELETE","POST", "PUT", "GET", "OPTIONS", "PATCH", "HEAD"], credentials: true}))
+app.use(cors({origin: [process.env.CLIENT, 'localhost:3000/'], methods: ["DELETE","POST", "PUT", "GET", "OPTIONS", "PATCH", "HEAD"], credentials: true}))
 
 
 app.get('/', (req, res)=>{

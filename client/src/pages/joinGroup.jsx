@@ -1,11 +1,34 @@
 import React from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useLoaderData, useNavigate, redirect } from 'react-router-dom'
 
 
-export default function joinGroup() {
+export default function JoinGroup() {
 
-    const [searchParams, _] = useSearchParams()
-    const {groupId} = searchParams
+    const {group, user} = useLoaderData()
+
+    const navigate = useNavigate()
+
+    const onJoinGroup = async (e) => {
+
+        // if (myGroups.map(group=>group._id).includes(searchResult._id)){
+        //     console.log('Already in group')
+        //     return
+        // }
+        
+        const res = await fetch(`https://oscarsballot.onrender.com/api/groups/adduser/${group.id}`,{
+            method: 'PATCH',
+            headers: {'content-type':'application/json','accepts':'application/json'},
+            credentials: 'include'
+        })
+        if (!res.ok) {
+            const data = await res.json()
+            console.log(data)
+            return null
+        }
+        
+        navigate('/groups')
+    }
+
 
     return (
         <div>
@@ -14,11 +37,11 @@ export default function joinGroup() {
                 <h3>Group Name</h3>
                 <h5>Members</h5>
                 <ul>
-                    {searchResult.users.map(user=>{
+                    {group.users.map(user=>{
                         return <li>{user.username}</li>
                     })}
                 </ul>
-                {(myGroups.map(group=>group._id).includes(searchResult._id))
+                {(group.users.includes(user))
                     ? <button disabled>Already a member!</button>
                     : <button onClick={onJoinGroup}>Join</button>
                 }
@@ -29,6 +52,25 @@ export default function joinGroup() {
 
 }
 
-export function loader({ request }) {
+export async function loader({ request }) {
     const groupId = new URL(request.url).searchParams.get('id')
+
+    const groupRes = await fetch(`https://oscarsballot.onrender.com/api/groups/${groupId}`)
+
+    if (!groupRes.ok){
+        return redirect('/groups') // BUILD THIS OUT
+    }
+    const group = await groupRes.json()
+
+    const userRes = await fetch('https://oscarsballot.onrender.com/api/users/authchecker', {
+        headers: {'content-type':'application/json', 'accepts':'application/json'},
+        credentials: 'include'
+    })
+    
+    if (!userRes.ok){
+        return redirect(`/auth?to=groups&id=${groupId}`)
+    }
+    const user = await userRes.json()
+
+    return {group, user}
 }

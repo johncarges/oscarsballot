@@ -263,9 +263,7 @@ h3 {
   padding: 0.5rem;
 }
 
-.group-list li {
-  /* padding: .5rem; */
-}
+
 
 .group-tile i {
   width: 1rem;
@@ -280,9 +278,7 @@ h3 {
   width: 100%
 }
 
-.new-group-container input {
-  box-sizing: border-box;
-}
+
 
 .group-search-result li {
   font-size: small;
@@ -305,6 +301,7 @@ h3 {
 .groups-page input {
   height: 1.5rem;
   font-size: medium;
+  box-sizing: border-box;
   padding: .25rem;
   margin: .25rem 0rem;
 }

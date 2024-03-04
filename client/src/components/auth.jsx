@@ -10,7 +10,11 @@ export default function Auth() {
     const [signupError, setSignupError] = useState(null)
 
     const [searchParams, _] = useSearchParams()
-    const destination = searchParams.get('to') === 'groups' ? '/groups' : '/'
+    let destination = searchParams.get('to') === 'groups' ? '/groups' : '/'
+    const groupId = searchParams.get('id')
+    if (groupId) {
+        destination = destination + '/' + groupId
+    }
 
     const initialState = {
         loginUsername: '',

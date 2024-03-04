@@ -8,6 +8,7 @@ import Admin, {loader as adminLoader} from './pages/admin'
 import Layout from './components/layout';
 import Auth from './components/auth';
 import Groups, {loader as groupsLoader} from './pages/groups'
+import JoinGroup, {loader as joinGroupsLoader} from './pages/joinGroup';
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,11 @@ const router = createBrowserRouter([
         loader: groupsLoader,
       },
       {
+        path: '/groups:id',
+        element: <JoinGroup />,
+        loader: joinGroupsLoader
+      },
+      {
         path:'/admin',
         element: <Admin />,
         loader: adminLoader,
@@ -35,10 +41,7 @@ const router = createBrowserRouter([
     path: '/auth',
     element: <Auth />
   },
-  {
-    path: '/join-group',
-    element: <h1>Join Group</h1>
-  }
+  
   
   
 ])
