@@ -30,7 +30,7 @@ router.patch("/addwinners", async (req, res)=>{
             console.log(award)
         })
 
-        res.status(200).json({message: "succesfully updated"})
+        // res.status(200).json({message: "succesfully updated"})
 
     } catch (err) {
         res.status(400).json(err)

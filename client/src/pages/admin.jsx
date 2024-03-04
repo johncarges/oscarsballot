@@ -26,7 +26,8 @@ export default function Admin(){
         })
 
         if (!res.ok) {
-            console.log(res.json())
+            const error = await res.json()
+            console.log(error)
             return null
         }
 

@@ -307,6 +307,12 @@ h3 {
   margin-top: .5rem;
 }
 
-.join-groups-page h5 {
+.join-groups-page h5,
+.join-group h5 {
   margin-bottom: 0rem;
 }
+.join-groups-page ul,
+.join-group ul {
+  margin-top: 0.25rem;
+}
+
