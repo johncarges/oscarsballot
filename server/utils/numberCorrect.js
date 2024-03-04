@@ -2,10 +2,14 @@ const Award = require('../models/award.model')
 const User = require('../models/user.model')
 
 module.exports = function numberCorrect(user, results) {
-            
+    
+    // results[0]: {_id: (awardId), winner: (winning Nominee Id)}
+    // user.responses[0]: {award: (awardId), response: (winning nominee Id)}
+    // Need result._id === response.award AND result.winner === response.response
+
     const correct = results.filter(result => {
-        const response = user.responses.filter(response=>response.award===result.award)
-        return response.response === result.response 
+        const response = user.responses.filter(response=>response.award===result._id)[0]
+        return response.response === result.winner
     })
     return correct.length
 }
