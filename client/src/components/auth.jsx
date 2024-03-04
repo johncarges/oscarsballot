@@ -30,9 +30,9 @@ export default function Auth() {
 
     const onLogin = async (e) => {
         e.preventDefault()
-        const body = JSON.stringify({'username':formData.loginUsername, 'password': formData.loginPassword})
-
         setLoading(true)
+        
+        const body = JSON.stringify({'username':formData.loginUsername, 'password': formData.loginPassword})
 
         const res = await fetch(`https://oscarsballot.onrender.com/api/users/login`, { 
             method: "POST",
@@ -49,6 +49,7 @@ export default function Auth() {
             setLoading(false)
             const message = await res.json()
             setLoginError(message.message)
+            return null
         }
         const data = await res.json()
         navigate(destination)
@@ -57,10 +58,12 @@ export default function Auth() {
 
     const onSignup = async (e) => {
         e.preventDefault()
+        setLoading(true)
+
         const url = `https://oscarsballot.onrender.com/api/users/register`
         const body = JSON.stringify({'username':formData.signupUsername, 'password': formData.signupPassword})
 
-        const res = fetch(url, {
+        const res = await fetch(url, {
             method: "POST",
             body: body,
             headers: {
@@ -73,6 +76,8 @@ export default function Auth() {
             const message = await res.json()
             setSignupError(message)
             console.log(message)
+            setLoading(false)
+            return null
         }
         const data = await res.json()
         navigate(destination)
@@ -102,6 +107,7 @@ export default function Auth() {
     // }
 
     const buttonStyle = loading ? {color:'grey'} : {}
+    const formStyle = loading ? {opacity: '70%'} : {}
 
     return (
         <div className='auth-page-container'>
@@ -109,10 +115,10 @@ export default function Auth() {
             <div className='auth-page page'>
                 <h2>Login</h2>
                 {loginError && <p className='error-message'>{loginError}</p> }
-                <form onChange={onChange} onSubmit={onLogin}>
+                <form style={formStyle} onChange={onChange} onSubmit={onLogin}>
                     <input name='loginUsername' placeholder="username" value={formData.loginUsername}/>
                     <input name='loginPassword' placeholder="password" value={formData.loginPassword}/>
-                    <button type='submit' disabled={loading}>Log In</button>
+                    <button type='submit' style={buttonStyle} disabled={loading}>Log In</button>
                 </form>
                 <h2>Signup</h2>
                 {signupError && <p className='error-message'>{signupError}</p> }
