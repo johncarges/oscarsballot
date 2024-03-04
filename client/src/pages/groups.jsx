@@ -68,15 +68,15 @@ export default function Groups() {
 
 
 
-    const newGroupButton = addingGroup
-    ? <div>
-        <input placeholder='Group name' value={newGroupName} onChange={onChangeNewGroupName}/>
-        <button className='new-group-button' onClick={onSubmitNew}>Submit</button>
-        <button onClick={()=>setAddingGroup(false)}>Cancel</button>
-    </div>
-    : <div>
-            <button className='new-group-button' onClick={()=>{setAddingGroup(true)}}>Create Group</button>
-    </div>
+    // const newGroupButton = addingGroup
+    // ? <div>
+    //     <input placeholder='Group name' value={newGroupName} onChange={onChangeNewGroupName}/>
+    //     <button className='new-group-button' onClick={onSubmitNew}>Submit</button>
+    //     <button onClick={()=>setAddingGroup(false)}>Cancel</button>
+    // </div>
+    // : <div>
+    //         <button className='new-group-button' onClick={()=>{setAddingGroup(true)}}>Create Group</button>
+    // </div>
 
 
     const onSearchChange = (e) => {

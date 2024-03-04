@@ -8,6 +8,8 @@ export default function GroupTile(props) {
 
     const users = group.users[0].correct !== undefined ? group.users.toSorted((a,b)=> a.correct - b.correct) : group.users
 
+    console.log(group)
+
     if (isExpanded) {
         return (
             <div className='group-tile' >
@@ -16,6 +18,7 @@ export default function GroupTile(props) {
                     {group.name}
                 </p>
                 <p>Code: {group.code}</p>
+                <a href={`https://oscarsballot-client.onrender.com/groups/${group._id}`}>Shareable Link</a>
                 <div>
                     
                     <table>
