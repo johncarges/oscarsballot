@@ -6,6 +6,8 @@ export default function JoinGroup() {
 
     const {group, user} = useLoaderData()
 
+    console.log(group)
+
     const navigate = useNavigate()
 
     const onJoinGroup = async (e) => {
@@ -52,8 +54,9 @@ export default function JoinGroup() {
 
 }
 
-export async function loader({ request }) {
-    const groupId = new URL(request.url).searchParams.get('id')
+export async function loader({ params }) {
+
+    const groupId = params.id
 
     const groupRes = await fetch(`https://oscarsballot.onrender.com/api/groups/${groupId}`)
 
