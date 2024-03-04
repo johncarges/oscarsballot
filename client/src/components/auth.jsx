@@ -84,6 +84,7 @@ export default function Auth() {
             return null
         }
         const data = await res.json()
+        console.log(data)
         navigate(destination)
     }
     
