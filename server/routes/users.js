@@ -86,6 +86,9 @@ router.get("/authchecker", async (req, res)=> {
     
     if (req.session.user) {
         const sessUser = await User.findById(req.session.user.id)
+        if (!sessUser) {
+            return res.status(404).json({message: 'User could not be found'})
+        }
         const results = await Award.find({winner: {$ne: null}}, '_id winner').lean()
         const user = sessUser.toObject()
         user.correct = await numberCorrect(user, results)
