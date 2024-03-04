@@ -7,14 +7,15 @@ export default function Groups() {
 
     const initialData = useLoaderData()
     const [myGroups, setMyGroups] = useState(initialData)
+    const [expanded, setExpanded] = useState(null)
 
     const [addingGroup, setAddingGroup] = useState(false)
     const [newGroupName, setNewGroupName] = useState('')
-    const [expanded, setExpanded] = useState(null)
+    const [addError, setAddError] = useState(null)
 
     const [searchTerms, setSearchTerms] = useState({groupName:'',code:''})
     const [searchResult, setSearchResult] = useState(null)
-    const [addError, setAddError] = useState(null)
+    const [searchError, setSearchError] = useState(null)
     
     const expandGroup = (groupId) => {
         setExpanded(groupId)
@@ -81,15 +82,19 @@ export default function Groups() {
 
     const onSearchChange = (e) => {
         setSearchTerms(prev=>{return {...prev, [e.target.name]:e.target.value}})
+        setSearchError(null)
     }
 
     const onSearchSubmit = async (e) => {
         e.preventDefault()
-
+        if (!searchTerms.groupName || !searchTerms.code){
+            setSearchError('Name and code must be included.')
+            return null
+        }
         const res = await fetch(`https://oscarsballot.onrender.com/api/groups/findbyname?groupName=${searchTerms.groupName}&code=${searchTerms.code}`)
         if (!res.ok){
-            const message = await res.json()
-            setAddError(message)
+            const data = await res.json()
+            setSearchError(data.message)
             return null
         }
         const data = await res.json()
@@ -161,6 +166,7 @@ export default function Groups() {
             </div>
             <div className='join-group'>
                 <h3>Join Group</h3>
+                <div className='error-message'>{searchError}</div>
                 <form onChange={onSearchChange} className='group-search' onSubmit={onSearchSubmit}>
                     <input name='groupName' placeholder='Group Name' value={searchTerms.groupName}/>
                     <input name='code' placeholder='Code' value={searchTerms.code}/>

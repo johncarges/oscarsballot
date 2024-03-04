@@ -132,6 +132,7 @@ export default function Auth() {
                     <button type='submit' style={buttonStyle} disabled={loading}>Sign Up</button>
                 </form>
             </div>
+            {/* <button onClick={()=>{navigator.clipboard.writeText(`https://oscarsballot-client.onrender.com/groups/`)}}>Copy link to clipboard</button> */}
             {/* <button onClick={checkButton}>Check</button>
             <button onClick={logOutButton}>Logout</button> */}
         </div>
