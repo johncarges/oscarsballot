@@ -11,7 +11,7 @@ module.exports = function numberCorrect(user, results) {
     // Need result._id === response.award AND result.winner === response.response
     if (user.responses.length === 0) return 0
     const correct = results.filter(result => {
-        const response = user.responses.filter(response=>response.award===result._id)[0]
+        const response = user.responses.filter(response=>response.award===result._id.toString())[0]
         return response.response === result.winner
     })
     return correct.length
