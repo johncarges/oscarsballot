@@ -31,10 +31,10 @@ export default function JoinGroup() {
         navigate('/groups')
     }
 
-    const alreadyJoined = group.users.map(user=>user._id).includes(user.id)
+    const alreadyJoined = group.users.map(user=>user._id).includes(user._id)
 
     return (
-        <div>
+        <div className='join-groups-page'>
             <h1>{alreadyJoined ? 'Already a member!' : 'Join this group?'}</h1>
             <div className='group-search-result'>
                 <h3>Group Name</h3>
@@ -74,7 +74,8 @@ export async function loader({ params }) {
     if (!userRes.ok){
         return redirect(`/auth?to=groups&id=${groupId}`)
     }
-    const user = await userRes.json()
-    console.log(user)
+    const userData = await userRes.json()
+    const user = userData.user
+
     return {group, user}
 }

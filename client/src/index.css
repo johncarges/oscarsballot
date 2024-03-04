@@ -263,8 +263,6 @@ h3 {
   padding: 0.5rem;
 }
 
-
-
 .group-tile i {
   width: 1rem;
   padding-right: .25rem;
@@ -278,14 +276,12 @@ h3 {
   width: 100%
 }
 
-
-
 .group-search-result li {
   font-size: small;
 }
 
-
-.groups-page button {
+.groups-page button,
+.join-groups-page button {
   padding: .5rem;
   height: 2rem;
   border: 2px solid var(--main-gold);
