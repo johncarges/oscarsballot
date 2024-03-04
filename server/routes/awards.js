@@ -23,6 +23,7 @@ router.patch("/addwinners", async (req, res)=>{
         const {winners} = req.body
         console.log(winners)
         const user = await req.session.user
+        console.log(user)
 
         if (!user || !winners) return res.status(400).json({message: 'Missing Data'})
 
