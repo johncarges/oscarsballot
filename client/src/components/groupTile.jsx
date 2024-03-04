@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 
 
 export default function GroupTile(props) {
 
     const {group, isExpanded, expand} = props
+    const [showShareableLink, setShowShareableLink] = useState(false)
+
 
     const users = group.users[0].correct !== undefined ? group.users.toSorted((a,b)=> a.correct - b.correct) : group.users
+
 
 
     if (isExpanded) {
@@ -17,7 +20,10 @@ export default function GroupTile(props) {
                     {group.name}
                 </p>
                 <p>Code: {group.code}</p>
-                <a href={`https://oscarsballot-client.onrender.com/groups/${group._id}`}>Shareable Link</a>
+                {showShareableLink
+                    ? <button onClick={setShowShareableLink(true)}>Share</button>
+                    : <p>{`https://oscarsballot-client.onrender.com/groups/${group._id}`}</p>
+                }
                 <div>
                     
                     <table>
