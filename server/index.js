@@ -34,7 +34,7 @@ app.use(session({
     }
   }))
 
-app.use(cors({origin: [process.env.CLIENT, 'localhost:3000/'], methods: ["DELETE","POST", "PUT", "GET", "OPTIONS", "PATCH", "HEAD"], credentials: true}))
+app.use(cors({origin: [process.env.CLIENT], methods: ["DELETE","POST", "PUT", "GET", "OPTIONS", "PATCH", "HEAD"], credentials: true}))
 
 
 app.get('/', (req, res)=>{
