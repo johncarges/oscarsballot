@@ -73,7 +73,7 @@ router.get("/:id", async (req, res) => {
     if (!group) return res.status(404).json({message: 'Group could not be found'})
 
     await group.populate('users', 'username')
-    return res.status(200).json({group: group})
+    return res.status(200).json(group)
 })
 
 router.post("/",  async (req, res)=> {
