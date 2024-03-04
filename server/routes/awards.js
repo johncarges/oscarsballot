@@ -22,8 +22,9 @@ router.patch("/addwinners", async (req, res)=>{
         // winners = {awardId: nomineeId ... }
         const {winners} = req.body
         console.log(winners)
+        const user = await req.session.user
 
-        if (!req.session.user || !winners) return res.status(400).json({message: 'Missing Data'})
+        if (!user || !winners) return res.status(400).json({message: 'Missing Data'})
 
         Object.keys(winners).forEach(async awardId => {
             console.log(awardId)
