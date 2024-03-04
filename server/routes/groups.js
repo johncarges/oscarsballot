@@ -35,17 +35,11 @@ router.get("/mygroups", async (req, res) => {
     
     
     const results = await Award.find({winner: {$ne: null}}, '_id winner').lean()
-    //Debug
-    console.log(results)
-    const testUser= myGroups[0].users[0]
-    console.log(testUser)
-    console.log(numberCorrect(testUser, results))
-
+    
     const groupObjects = myGroups.map(group=>{
         return formatGroup(group, results)
     })
     
-    console.log(groupObjects)
     
     return res.status(200).json(groupObjects)
 })
