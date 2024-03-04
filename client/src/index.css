@@ -306,3 +306,7 @@ h3 {
 .join-group button {
   margin-top: .5rem;
 }
+
+.join-groups-page h5 {
+  margin-bottom: 0rem;
+}

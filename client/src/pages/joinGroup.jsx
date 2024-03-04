@@ -40,7 +40,7 @@ export default function JoinGroup() {
         <div className='join-groups-page'>
             <h1>{alreadyJoined ? 'Already a member!' : 'Join this group?'}</h1>
             <div className='group-search-result'>
-                <h3>Group Name</h3>
+                <h3>{group.name}</h3>
                 <h5>Members</h5>
                 <ul>
                     {group.users.map(user=>{
