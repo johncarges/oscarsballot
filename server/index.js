@@ -35,7 +35,21 @@ app.use(session({
     }
   }))
 
-app.use(cors({origin: [process.env.CLIENT], methods: ["DELETE","POST", "PUT", "GET", "OPTIONS", "PATCH", "HEAD"], credentials: true}))
+// New: 
+var whitelist = [process.env.CLIENT, 'http://localhost:3000']
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }, methods: ["DELETE","POST", "PUT", "GET", "OPTIONS", "PATCH", "HEAD"], 
+  credentials: true
+}
+app.use(cors(corsOptions))
+
+// app.use(cors({origin: [process.env.CLIENT], methods: ["DELETE","POST", "PUT", "GET", "OPTIONS", "PATCH", "HEAD"], credentials: true}))
 
 
 app.get('/', (req, res)=>{

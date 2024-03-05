@@ -116,6 +116,12 @@ button {
   border-bottom-left-radius: 3px;
 }
 
+.loading-overlay {
+  z-index: 1;
+  width: 100%;
+  opacity: 40%
+}
+
 
 .layout {
   width: 100%;

@@ -122,7 +122,7 @@ export default function Auth() {
         <div className='auth-page-container'>
             <div className='auth-banner'><h2>Oscars Ballot</h2></div>
             <div className='auth-page page'>
-                <div className='loading-overlay' style={{display: loadingStyle, height:'40px'}}></div>
+                <div className='loading-overlay' style={{display: loadingStyle, height:'400px'}}></div>
                 <h2>Login</h2>
                 {loginError && <p className='error-message'>{loginError}</p> }
                 <form style={formStyle} onChange={onChange} onSubmit={onLogin}>
