@@ -10,8 +10,6 @@ const Award = require("../models/award.model")
 router.post("/register", async (req, res) =>{
     const {username, password} = req.body
 
-    console.log(username)
-    console.log(password)
 
     if (!username || !password) {
         return res.status(400).json({message: "Please enter all fields"})
@@ -86,8 +84,7 @@ router.post("/logout", async (req, res) => {
 })
 
 router.get("/authchecker", async (req, res)=> {
-    console.log('authCheck')
-    console.log(req.session.user)
+    
     if (req.session.user) {
         const sessUser = await User.findById(req.session.user.id)
         if (!sessUser) {

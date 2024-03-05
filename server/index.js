@@ -36,7 +36,7 @@ app.use(session({
   }))
 
 // New: 
-var whitelist = [process.env.CLIENT, 'http://localhost:3000']
+var whitelist = [process.env.CLIENT, 'http://localhost:3000','https://www.thunderclient.com']
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
@@ -67,26 +67,26 @@ const runServer = () => {
     })
 }
 
-app.post('/login', (req, res) => {
-    const {username, password} = req.body
-    console.log(req.body)
-    req.session.user = {username: username}
-    res.status(200).json({msg:username})
-})
+// app.post('/login', (req, res) => {
+//     const {username, password} = req.body
+//     console.log(req.body)
+//     req.session.user = {username: username}
+//     res.status(200).json({msg:username})
+// })
 
-const checkAuth = (req, res, next) => {
-    if (req.session.user) {
-        console.log(req.session.user)
-        next()
-    } else {
-        return res.status(422).json({msg:'not logged in'})
-    }
-}
+// const checkAuth = (req, res, next) => {
+//     if (req.session.user) {
+//         console.log(req.session.user)
+//         next()
+//     } else {
+//         return res.status(422).json({msg:'not logged in'})
+//     }
+// }
 
-app.get('/checkuser', checkAuth, (req, res) => {
-    console.log("/checkuser")
-    return res.status(200).json({msg: req.session.user.username})
-})
+// app.get('/checkuser', checkAuth, (req, res) => {
+//     console.log("/checkuser")
+//     return res.status(200).json({msg: req.session.user.username})
+// })
 
 
 app.get('/api/awards', async (req, res) => {

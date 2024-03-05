@@ -125,7 +125,7 @@ export default function Ballot(){
         <div className='ballot-submit-bar-container'>
             <div className='ballot-submit-bar'>
                 { submitted
-                    ? <button onClick={()=>console.log('Edit')}>Edit</button>
+                    ? <button onClick={null}>Submitted</button>
                     : <button onClick={onSubmit}>Submit</button>
                 }
             </div>
