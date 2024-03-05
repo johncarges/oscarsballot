@@ -18,7 +18,7 @@ export default function JoinGroup() {
         //     return
         // }
         
-        const res = await fetch(`https://oscarsballot.onrender.com/api/groups/adduser/${group._id}`,{
+        const res = await fetch(`https://server.oscarsballot.com/api/groups/adduser/${group._id}`,{
             method: 'PATCH',
             headers: {'content-type':'application/json','accepts':'application/json'},
             credentials: 'include'
@@ -61,14 +61,14 @@ export async function loader({ params }) {
 
     const groupId = params.id
 
-    const groupRes = await fetch(`https://oscarsballot.onrender.com/api/groups/${groupId}`)
+    const groupRes = await fetch(`https://server.oscarsballot.com/api/groups/${groupId}`)
 
     if (!groupRes.ok){
         return redirect('/groups') // BUILD THIS OUT
     }
     const group = await groupRes.json()
 
-    const userRes = await fetch('https://oscarsballot.onrender.com/api/users/authchecker', {
+    const userRes = await fetch('https://server.oscarsballot.com/api/users/authchecker', {
         headers: {'content-type':'application/json', 'accepts':'application/json'},
         credentials: 'include'
     })

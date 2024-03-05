@@ -19,7 +19,7 @@ export default function Admin(){
             winners: selected
         }
 
-        const res = await fetch('https://oscarsballot.onrender.com/api/awards/addwinners',{
+        const res = await fetch('https://server.oscarsballot.com/api/awards/addwinners',{
             method: 'PATCH',
             headers: {'accepts':'application/json','content-type':'application/json'},
             body: JSON.stringify(body),
@@ -122,7 +122,7 @@ export default function Admin(){
 
 export async function loader(){
 
-    const awardsRes = await fetch('https://oscarsballot.onrender.com/api/awards',{
+    const awardsRes = await fetch('https://server.oscarsballot.com/api/awards',{
         headers: {'accepts':'application/json','content-type':'application/json'}
     })
     if (!awardsRes.ok){

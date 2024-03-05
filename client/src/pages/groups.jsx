@@ -46,7 +46,7 @@ export default function Groups() {
             return null
         }
         
-        const res = await fetch('https://oscarsballot.onrender.com/api/groups',{
+        const res = await fetch('https://server.oscarsballot.com/api/groups',{
             method: 'POST',
             headers: {'accepts':'application/json',
             'content-type':'application/json'},
@@ -91,7 +91,7 @@ export default function Groups() {
             setSearchError('Name and code must be included.')
             return null
         }
-        const res = await fetch(`https://oscarsballot.onrender.com/api/groups/findbyname?groupName=${searchTerms.groupName}&code=${searchTerms.code}`)
+        const res = await fetch(`https://server.oscarsballot.com/api/groups/findbyname?groupName=${searchTerms.groupName}&code=${searchTerms.code}`)
         if (!res.ok){
             const data = await res.json()
             setSearchError(data.message)
@@ -110,7 +110,7 @@ export default function Groups() {
         }
         
 
-        const res = await fetch(`https://oscarsballot.onrender.com/api/groups/adduser/${searchResult._id}`,{
+        const res = await fetch(`https://server.oscarsballot.com/api/groups/adduser/${searchResult._id}`,{
             method: 'PATCH',
             headers: {'content-type':'application/json','accepts':'application/json'},
             credentials: 'include'
@@ -180,7 +180,7 @@ export default function Groups() {
 }
 
 export const loader = async () => {
-    const userRes = await fetch('https://oscarsballot.onrender.com/api/users/authchecker', {
+    const userRes = await fetch('https://server.oscarsballot.com/api/users/authchecker', {
         headers: {'content-type':'application/json', 'accepts':'application/json'},
         credentials: 'include'
     })
@@ -192,7 +192,7 @@ export const loader = async () => {
     const userData = await userRes.json()
     
     
-    const res = await fetch('https://oscarsballot.onrender.com/api/groups/mygroups',{
+    const res = await fetch('https://server.oscarsballot.com/api/groups/mygroups',{
         headers: {'accepts':'application/json','content-type':'application/json'},
         credentials: 'include',
     })

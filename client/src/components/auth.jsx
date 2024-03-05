@@ -40,7 +40,7 @@ export default function Auth() {
         
         const body = JSON.stringify({'username':formData.loginUsername, 'password': formData.loginPassword})
 
-        const res = await fetch(`https://oscarsballot.onrender.com/api/users/login`, { 
+        const res = await fetch(`https://server.oscarsballot.com/api/users/login`, { 
             method: "POST",
             body: body,
             headers: {
@@ -66,7 +66,7 @@ export default function Auth() {
         e.preventDefault()
         setLoading(true)
 
-        const url = `https://oscarsballot.onrender.com/api/users/register`
+        const url = `https://server.oscarsballot.com/api/users/register`
         const body = JSON.stringify({'username':formData.signupUsername, 'password': formData.signupPassword})
 
         const res = await fetch(url, {
@@ -94,7 +94,7 @@ export default function Auth() {
     // DELETE THIS:
     // const checkButton = async (e) => {
 
-    //     const userRes = await fetch('https://oscarsballot.onrender.com/api/users/authchecker', { 
+    //     const userRes = await fetch('https://server.oscarsballot.com/api/users/authchecker', { 
     //         headers: {'content-type':'application/json', 
     //         'accepts':'application/json', 
     //         'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key',
@@ -111,7 +111,7 @@ export default function Auth() {
     // }
 
     // const logOutButton = async (e) => {
-    //     fetch('https://oscarsballot.onrender.com/api/users/logout', {method: "POST", credentials: 'include'})
+    //     fetch('https://server.oscarsballot.com/api/users/logout', {method: "POST", credentials: 'include'})
     // }
 
     const buttonStyle = loading ? {color:'grey'} : {}
@@ -120,7 +120,7 @@ export default function Auth() {
 
     return (
         <div className='auth-page-container'>
-            <div className='auth-banner'><h2>Oscar Ballot</h2></div>
+            <div className='auth-banner'><h2>Oscars Ballot</h2></div>
             <div className='auth-page page'>
                 <div className='loading-overlay' style={{display: loadingStyle, height:'40px'}}></div>
                 <h2>Login</h2>
