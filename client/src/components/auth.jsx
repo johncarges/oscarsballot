@@ -88,6 +88,7 @@ export default function Auth() {
         // const data = await res.json()
         setSignupError(destination)
         navigate(destination)
+        setLoading(false)
     }
     
     // DELETE THIS:

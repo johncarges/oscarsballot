@@ -87,6 +87,7 @@ router.post("/logout", async (req, res) => {
 
 router.get("/authchecker", async (req, res)=> {
     
+    console.log(req.session.user)
     if (req.session.user) {
         const sessUser = await User.findById(req.session.user.id)
         if (!sessUser) {
