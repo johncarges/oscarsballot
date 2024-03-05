@@ -77,10 +77,10 @@ export default function Auth() {
             credentials: 'include'
         })
         if (!res.ok) {
+            setLoading(false)
             const {message} = await res.json()
             setSignupError(message)
             console.log(message)
-            setLoading(false)
             return null
         }
         const data = await res.json()
