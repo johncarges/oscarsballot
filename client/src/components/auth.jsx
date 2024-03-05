@@ -86,7 +86,7 @@ export default function Auth() {
             return null
         }
         // const data = await res.json()
-        setSignupError(destination)
+
         navigate(destination)
         setLoading(false)
     }
@@ -115,14 +115,13 @@ export default function Auth() {
     // }
 
     const buttonStyle = loading ? {color:'grey'} : {}
-    const formStyle = loading ? {opacity: '70%'} : {}
-    const loadingStyle = loading ? 'block' : 'none'
+    const formStyle = loading ? {opacity: '40%'} : {}
+    const loadingStyle = loading ? {opacity: '70%'} : {}
 
     return (
         <div className='auth-page-container'>
             <div className='auth-banner'><h2>Oscars Ballot</h2></div>
-            <div className='auth-page page'>
-                <div className='loading-overlay' style={{display: loadingStyle, height:'400px'}}></div>
+            <div className='auth-page page' >
                 <h2>Login</h2>
                 {loginError && <p className='error-message'>{loginError}</p> }
                 <form style={formStyle} onChange={onChange} onSubmit={onLogin}>
@@ -132,7 +131,7 @@ export default function Auth() {
                 </form>
                 <h2>New User?</h2>
                 {signupError && <p className='error-message'>{signupError}</p> }
-                <form name='signup' onChange={onChange} onSubmit={onSignup} >
+                <form style={formStyle} name='signup' onChange={onChange} onSubmit={onSignup} >
                     <input name='signupUsername' placeholder="Username" value={formData.signupUsername} />
                     <input name='signupPassword' placeholder="Password" type='text' onFocus={(e)=> e.target.type ='password'} value={formData.signupPassword}/>
                     <button type='submit' style={buttonStyle} disabled={loading}>Sign Up</button>
