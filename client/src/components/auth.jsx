@@ -29,6 +29,8 @@ export default function Auth() {
         setFormData((prev)=>{
             return {...prev, [e.target.name]:e.target.value}
         })
+        setLoginError(null)
+        setSignupError(null)
     }
 
 
@@ -83,7 +85,8 @@ export default function Auth() {
             console.log(message)
             return null
         }
-        const data = await res.json()
+        // const data = await res.json()
+        setSignupError(destination)
         navigate(destination)
     }
     
