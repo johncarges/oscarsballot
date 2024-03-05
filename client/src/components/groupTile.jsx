@@ -19,7 +19,7 @@ export default function GroupTile(props) {
                     {group.name}
                 </p>
                 <p>Code: {group.code}</p>
-                <button onClick={()=>{navigator.clipboard.writeText(`https://server.oscarsballot.com/groups/${group._id}`)}}>Copy link to clipboard</button>
+                <button onClick={()=>{navigator.clipboard.writeText(`https://oscarsballot.com/groups/${group._id}`)}}>Copy link to clipboard</button>
                 <div>
                     
                     <table>
