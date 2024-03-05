@@ -36,10 +36,10 @@ app.use(session({
   }))
 
 // New: 
-var whitelist = [process.env.CLIENT, 'http://localhost:3000','https://www.thunderclient.com']
+var whitelist = [process.env.CLIENT, 'http://localhost:3000']
 var corsOptions = {
   origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
       callback(null, true)
     } else {
       callback(new Error(`Origin: ${origin} not allowed by CORS`))
