@@ -27,6 +27,7 @@ app.use(session({
     resave: false,  // don't save session if unmodified
     store: mongoDBStore,
     unset: 'destroy',
+    proxy: true, // 
     saveUninitialized: false,  // don't create session until something stored
     cookie: {
         sameSite: 'none',
