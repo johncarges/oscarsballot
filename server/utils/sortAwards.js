@@ -1,4 +1,4 @@
-export default function sortAwards(awards) {
+function sortAwards(awards) {
 
     const awardsList = {
         "Animated Feature Film": 1,
@@ -29,3 +29,5 @@ export default function sortAwards(awards) {
     return awards.toSorted((a, b) => awardsList[a.name] - awardsList[b.name])
 
 }
+
+module.exports = sortAwards

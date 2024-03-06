@@ -7,7 +7,7 @@ const router = express.Router()
 const User = require('./models/user.model.js')
 const Award = require('./models/award.model.js')
 const Group = require('./models/group.model.js')
-const { default: sortAwards } = require('./utils/sortAwards.js')
+const sortAwards  = require('./utils/sortAwards.js')
 
 require('dotenv').config()
 // console.log(process.env.CONNECTION_STRING)
