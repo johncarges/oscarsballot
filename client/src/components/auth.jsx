@@ -85,34 +85,11 @@ export default function Auth() {
             console.log(message)
             return null
         }
-        // const data = await res.json()
 
         navigate(destination)
         setLoading(false)
     }
     
-    // DELETE THIS:
-    // const checkButton = async (e) => {
-
-    //     const userRes = await fetch('https://server.oscarsballot.com/api/users/authchecker', { 
-    //         headers: {'content-type':'application/json', 
-    //         'accepts':'application/json', 
-    //         'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key',
-    //         'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS'},
-    //         credentials: 'include',
-            
-    //     })
-    //     if (!userRes.ok){
-    //         const message = await userRes.json()
-    //         setError(message.message)
-    //     }
-    //     const data = await userRes.json()
-
-    // }
-
-    // const logOutButton = async (e) => {
-    //     fetch('https://server.oscarsballot.com/api/users/logout', {method: "POST", credentials: 'include'})
-    // }
 
     const buttonStyle = loading ? {color:'grey'} : {}
     const formStyle = loading ? {opacity: '40%'} : {}
@@ -137,9 +114,7 @@ export default function Auth() {
                     <button type='submit' style={buttonStyle} disabled={loading}>Sign Up</button>
                 </form>
             </div>
-            {/* <button onClick={()=>{navigator.clipboard.writeText(`https://oscarsballot-client.onrender.com/groups/`)}}>Copy link to clipboard</button> */}
-            {/* <button onClick={checkButton}>Check</button>
-            <button onClick={logOutButton}>Logout</button> */}
+
         </div>
     )
 

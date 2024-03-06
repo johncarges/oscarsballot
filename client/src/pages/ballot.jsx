@@ -15,6 +15,8 @@ export default function Ballot(){
     const [selected, setSelected] = useState(initialSelected) // object of awards: chosen nominee (or null)
     const [missingAwards, setMissingAwards] = useState([]) // array of ids for awards left blank on submission 
 
+    
+
     const postSelections = async () => {
         
         // Convert from {awardId:nomineeId} to [{award: awardId, nominee:nomineeId}]

@@ -295,6 +295,7 @@ h3 {
   border: 2px solid var(--main-gold);
   border-radius:3px;
   background-color: white;
+  color: black;
 }
 
 .groups-page form {
