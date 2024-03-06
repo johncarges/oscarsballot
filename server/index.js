@@ -7,6 +7,7 @@ const router = express.Router()
 const User = require('./models/user.model.js')
 const Award = require('./models/award.model.js')
 const Group = require('./models/group.model.js')
+const { default: sortAwards } = require('./utils/sortAwards.js')
 
 require('dotenv').config()
 // console.log(process.env.CONNECTION_STRING)
@@ -67,32 +68,13 @@ const runServer = () => {
     })
 }
 
-// app.post('/login', (req, res) => {
-//     const {username, password} = req.body
-//     console.log(req.body)
-//     req.session.user = {username: username}
-//     res.status(200).json({msg:username})
-// })
-
-// const checkAuth = (req, res, next) => {
-//     if (req.session.user) {
-//         console.log(req.session.user)
-//         next()
-//     } else {
-//         return res.status(422).json({msg:'not logged in'})
-//     }
-// }
-
-// app.get('/checkuser', checkAuth, (req, res) => {
-//     console.log("/checkuser")
-//     return res.status(200).json({msg: req.session.user.username})
-// })
 
 
 app.get('/api/awards', async (req, res) => {
     try {
         const awards = await Award.find({}, 'name nominees winner')
-        res.status(200).json(awards)
+        const sortedAwards = sortAwards(awards)
+        res.status(200).json(sortedAwards)
     } catch (error) {
         res.status(500).json({message: error.message})
     }

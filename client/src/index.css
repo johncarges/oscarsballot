@@ -222,7 +222,11 @@ h3 {
 }
 
 .winner {
-  background-color: green
+  background-color: rgb(136, 239, 136)
+}
+
+.incorrect-choice {
+  background-color:#ff7e7e
 }
 
 .ballot-submit-bar-container {
@@ -239,6 +243,7 @@ h3 {
 .ballot-submit-bar {
   width: var(--page-width);
   text-align: end;
+
 }
 
 .ballot-submit-bar button {

@@ -15,10 +15,11 @@ export default function Ballot(){
     const [selected, setSelected] = useState(initialSelected) // object of awards: chosen nominee (or null)
     const [missingAwards, setMissingAwards] = useState([]) // array of ids for awards left blank on submission 
 
-    
+    const [submitting, setSubmitting] = useState(false)
+
 
     const postSelections = async () => {
-        
+        setSubmitting(true)
         // Convert from {awardId:nomineeId} to [{award: awardId, nominee:nomineeId}]
         const responses = Object.keys(selected).reduce((a,awardId)=>([
             ...a,
@@ -46,7 +47,7 @@ export default function Ballot(){
 
         const data = await res.json()
         setSubmitted(true)
-
+        setSubmitting(false)
     }
 
     const onSelect = (award, nominee) => {
@@ -69,6 +70,17 @@ export default function Ballot(){
 
     const filmFirst = ['Animated Feature Film', 'Documentary Feature Film', 'Documentary Short Film', 'International Feature Film', 'Best Picture','Animated Short Film', 'Live Action Short Film']
 
+    const nomineeStyle = (award, nomineeId) => {
+        if (selected[award._id] === nomineeId && !award.winner) {
+            return 'nominee-box selected'
+        } else if (selected[award._id] === nomineeId && award.winner !== nomineeId) {
+            return 'nominee-box incorrect-choice'
+        } else if ( award.winner === nomineeId) { 
+            return 'nominee-box winner'
+        } else {
+            return 'nominee-box'
+        }
+    }    
 
     const renderedAwards = awards.map(award=>{
         const awardClassName = missingAwards.includes(award._id) ? 'award-box missing' : 'award-box'
@@ -78,7 +90,8 @@ export default function Ballot(){
                 <h3>{award.name}</h3>
                 <div className='nominees'>
                     {award.nominees.map(nominee=>{
-                        const style = selected[award._id] === nominee._id ? 'nominee-box selected' : 'nominee-box '
+                        // const style = selected[award._id] === nominee._id ? 'nominee-box selected' : 'nominee-box '
+                        const style = nomineeStyle(award, nominee._id)
                         
                         if (filmFirst.includes(award.name)) {
                             return (
@@ -105,7 +118,7 @@ export default function Ballot(){
 
     const onSubmit = (e) => {
         e.preventDefault()
-
+        
         let error = false
 
         // first check to see if any entries are left blank
@@ -123,12 +136,17 @@ export default function Ballot(){
         }
     }
 
+    const submitStyle = submitting ? {"opacity":'50%'} : {}
+
     const ballotSubmitBar = (
         <div className='ballot-submit-bar-container'>
             <div className='ballot-submit-bar'>
+                
                 { submitted
                     ? <button onClick={null}>Submitted</button>
-                    : <button onClick={onSubmit}>Submit</button>
+                    : <button onClick={onSubmit} disable={submitting.toString()} style={submitStyle}>
+                        {missingAwards.length > 0 ? 'Please Complete Ballot' : 'Submit'}
+                    </button>
                 }
             </div>
         </div>
