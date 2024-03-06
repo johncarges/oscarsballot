@@ -186,7 +186,8 @@ export const loader = async () => {
     })
     
     if (!userRes.ok){
-        console.log(userRes)
+        const data = await userRes.json()
+        console.log(data)
         return redirect('/auth?to=groups')
     }
     const userData = await userRes.json()

@@ -16,7 +16,7 @@ export default function Ballot(){
     const [missingAwards, setMissingAwards] = useState([]) // array of ids for awards left blank on submission 
 
     const postSelections = async () => {
-        console.log(Object.keys(selected))
+        
         // Convert from {awardId:nomineeId} to [{award: awardId, nominee:nomineeId}]
         const responses = Object.keys(selected).reduce((a,awardId)=>([
             ...a,
@@ -43,7 +43,7 @@ export default function Ballot(){
         }
 
         const data = await res.json()
-        console.log(data)
+        setSubmitted(true)
 
     }
 

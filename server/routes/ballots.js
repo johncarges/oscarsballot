@@ -20,7 +20,9 @@ router.patch("/", async (req, res)=>{
 
         if (!user) return res.status(404).json({message: "User not found"})
     
-        req.session.user = user
+        req.session.user = {id: user.id, username: user.username, responses: user.responses}
+        req.session.save()
+        console.log(req.session.user)
 
         res.status(200).json(user)
         // res.status(200).json({userId:userId, responses:responses})
