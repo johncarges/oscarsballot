@@ -99,5 +99,16 @@ router.get("/authchecker", async (req, res)=> {
     }
 })
 
+
+router.delete('/', async (req, res) =>{
+    // DEV ONLY
+    try {
+        await User.deleteMany({})
+        return res.status(204).json({message: 'No Content"'})
+    } catch (err) {
+        return res.status(400).json({message: err.message})
+    }
+})
+
 module.exports = router
 

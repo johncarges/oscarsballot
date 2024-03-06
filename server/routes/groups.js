@@ -75,6 +75,8 @@ router.get("/:id", async (req, res) => {
     return res.status(200).json(group)
 })
 
+
+
 router.post("/",  async (req, res)=> {
     const user =  await req.session.user
     

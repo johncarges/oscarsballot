@@ -7,7 +7,7 @@ export default function GroupTile(props) {
     const {group, isExpanded, expand} = props
 
 
-    const users = group.users[0].correct !== undefined ? group.users.toSorted((a,b)=> a.correct - b.correct) : group.users
+    const users = group.users[0].correct !== undefined ? group.users.toSorted((a,b)=> b.correct - a.correct) : group.users
 
 
 
