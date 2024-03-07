@@ -38,7 +38,7 @@ export default function Auth() {
         e.preventDefault()
         setLoading(true)
         
-        const body = JSON.stringify({'username':formData.loginUsername, 'password': formData.loginPassword})
+        const body = JSON.stringify({'username':formData.loginUsername.replace(' ',''), 'password': formData.loginPassword})
 
         const res = await fetch(`https://server.oscarsballot.com/api/users/login`, { 
             method: "POST",
@@ -67,7 +67,7 @@ export default function Auth() {
         setLoading(true)
 
         const url = `https://server.oscarsballot.com/api/users/register`
-        const body = JSON.stringify({'username':formData.signupUsername, 'password': formData.signupPassword})
+        const body = JSON.stringify({'username':formData.signupUsername.replace(' ',''), 'password': formData.signupPassword})
 
         const res = await fetch(url, {
             method: "POST",
