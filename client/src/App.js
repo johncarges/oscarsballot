@@ -9,6 +9,7 @@ import Layout from './components/layout';
 import Auth from './components/auth';
 import Groups, {loader as groupsLoader} from './pages/groups'
 import JoinGroup, {loader as joinGroupsLoader} from './pages/joinGroup';
+import GroupBallot, {loader as groupBallotLoader} from './pages/groupBallot';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,11 @@ const router = createBrowserRouter([
         path: '/groups',
         element: <Groups />,
         loader: groupsLoader,
+      },
+      {
+        path: '/groups/ballot/:id',
+        element: <GroupBallot/>,
+        loader: groupBallotLoader
       },
       {
         path: '/groups/:id',

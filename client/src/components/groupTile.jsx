@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { Link } from 'react-router-dom'
 
 
 
 export default function GroupTile(props) {
 
-    const {group, isExpanded, expand} = props
+    const {group, isExpanded, expand, hasSubmitted} = props
 
 
     const users = group.users[0].correct !== undefined ? group.users.toSorted((a,b)=> b.correct - a.correct) : group.users
@@ -18,10 +19,15 @@ export default function GroupTile(props) {
                     <span><i onClick={()=>expand(null)} className="fa-solid fa-angle-down" /></span>
                     {group.name}
                 </p>
-                <p>Code: {group.code}</p>
-                <button onClick={()=>{navigator.clipboard.writeText(`https://oscarsballot.com/groups/${group._id}`)}}>Copy link to clipboard</button>
+                <div className='share-box'>
+                    <p>Share: </p>
+                    <div>
+                        <p>Code: {group.code}</p>
+                        <button onClick={()=>{navigator.clipboard.writeText(`https://oscarsballot.com/groups/${group._id}`)}}>Copy link to clipboard</button>
+                    </div>
+                </div>
+                {hasSubmitted ? <Link to={`ballot/${group._id}`} style={{color:'black'}}>&rarr; See group picks</Link> : <p>Submit ballot to see group picks</p>}
                 <div>
-                    
                     <table>
                         <tr>
                             <th>User</th>

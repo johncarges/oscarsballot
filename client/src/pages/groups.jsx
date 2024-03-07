@@ -5,11 +5,10 @@ import GroupTile from '../components/groupTile'
 
 export default function Groups() {
 
-    const initialData = useLoaderData()
-    const [myGroups, setMyGroups] = useState(initialData)
+    const {groupData, user} = useLoaderData()
+    const [myGroups, setMyGroups] = useState(groupData)
     const [expanded, setExpanded] = useState(null)
 
-    const [addingGroup, setAddingGroup] = useState(false)
     const [newGroupName, setNewGroupName] = useState('')
     const [addError, setAddError] = useState(null)
 
@@ -17,6 +16,10 @@ export default function Groups() {
     const [searchResult, setSearchResult] = useState(null)
     const [searchError, setSearchError] = useState(null)
     
+    const hasSubmitted = user.responses.length > 0
+
+    console.log(hasSubmitted)
+
     const expandGroup = (groupId) => {
         setExpanded(groupId)
     }
@@ -29,6 +32,7 @@ export default function Groups() {
                     group={group} 
                     isExpanded={expanded===group._id}
                     expand={expandGroup}
+                    hasSubmitted={hasSubmitted}
                 />
             </li>
         )
@@ -63,21 +67,10 @@ export default function Groups() {
             newGroup,
             ...myGroups
         ])
-        setAddingGroup(false)
+
 
     }
 
-
-
-    // const newGroupButton = addingGroup
-    // ? <div>
-    //     <input placeholder='Group name' value={newGroupName} onChange={onChangeNewGroupName}/>
-    //     <button className='new-group-button' onClick={onSubmitNew}>Submit</button>
-    //     <button onClick={()=>setAddingGroup(false)}>Cancel</button>
-    // </div>
-    // : <div>
-    //         <button className='new-group-button' onClick={()=>{setAddingGroup(true)}}>Create Group</button>
-    // </div>
 
 
     const onSearchChange = (e) => {
@@ -116,7 +109,7 @@ export default function Groups() {
             credentials: 'include'
         })
         if (!res.ok) {
-            data = await res.json()
+            const data = await res.json()
             console.log(data)
             return null
         }
@@ -191,7 +184,7 @@ export const loader = async () => {
         return redirect('/auth?to=groups')
     }
     const userData = await userRes.json()
-    
+    const user = userData.user
     
     const res = await fetch('https://server.oscarsballot.com/api/groups/mygroups',{
         headers: {'accepts':'application/json','content-type':'application/json'},
@@ -200,5 +193,7 @@ export const loader = async () => {
     if (!res.ok){
         return redirect("/auth?to=groups")
     }
-    return res.json()
+    // return res.json()
+    const groupData = await res.json()
+    return {user, groupData}
 }

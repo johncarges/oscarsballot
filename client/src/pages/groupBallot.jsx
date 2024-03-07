@@ -12,11 +12,15 @@ export default function GroupBallot(){
 
     const nomineeStyle = (award, nomineeId) => {
         if ( award.winner === nomineeId) { 
-            return 'nominee-box winner'
+            return 'group-ballot-nominee winner'
         } else {
-            return 'nominee-box'
+            return 'group-ballot-nominee'
         }
     }    
+
+    const nomineeUsers = (nominee) => {
+        return nominee.users.map(user=>user.username).join(', ')
+    }
 
     const renderedAwards = awards.map(award=>{
         
@@ -30,16 +34,22 @@ export default function GroupBallot(){
                         
                         if (filmFirst.includes(award.name)) {
                             return (
-                            <div key={nominee._id} className={style}  onClick={()=>onSelect(award, nominee)}>
-                                <h4 className='film-name'>{nominee.film}</h4>
-                                <h5 className='nominee'>{nominee.name}</h5>
+                            <div key={nominee._id} className={style}>
+                                <div>
+                                    <h4 className='film-name'>{nominee.film}</h4>
+                                    <h5 className='nominee'>{nominee.name}</h5>
+                                </div>
+                                <p>{nomineeUsers(nominee)}</p>
                             </div>
                             )
                         } else {
                             return (
-                                <div key={nominee._id} className={style}  onClick={()=>onSelect(award, nominee)}>
-                                    <h4 className='nominee'>{nominee.name}</h4>
-                                    <h5 className='film-name'>{nominee.film}</h5>
+                                <div key={nominee._id} className={style}>
+                                    <div>
+                                        <h4 className='nominee'>{nominee.name}</h4>
+                                        <h5 className='film-name'>{nominee.film}</h5>
+                                    </div>
+                                    <p>{nomineeUsers(nominee)}</p>
                                 </div>
                             )
                         }
@@ -61,7 +71,9 @@ export default function GroupBallot(){
 
 export async function loader({params}){
     
-    const {groupId} = params
+    const groupId = params.id
+
+    console.log(groupId)
 
     const awardsRes = await fetch('https://server.oscarsballot.com/api/awards',{
         headers: {'accepts':'application/json','content-type':'application/json'}
@@ -73,7 +85,7 @@ export async function loader({params}){
 
     const awards= await awardsRes.json()
     
-    const groupRes = await fetch(`https://server.oscarsballot.com/api/groups/${groupId}`)
+    const groupRes = await fetch(`https://server.oscarsballot.com/api/groups/${groupId}?responses=include`)
 
     if (!groupRes.ok){
         const data = await groupRes.json()

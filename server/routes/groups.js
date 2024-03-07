@@ -66,16 +66,20 @@ router.get("/findbyname", async (req, res)=> {
 })
 
 router.get("/:id", async (req, res) => {
-    const {id} = req.params
-    const group = await Group.findById(id)
 
-
-    if (!group) return res.status(404).json({message: 'Group could not be found'})
-
-    const populateString = req.query.responses === 'include' ? 'username responses' : 'username'
-
-    await group.populate('users', populateString) // new
-    return res.status(200).json(group)
+    try {
+        const {id} = req.params
+        const group = await Group.findById(id)
+    
+        if (!group) return res.status(404).json({message: 'Group could not be found'})
+    
+        const populateString = req.query.responses === 'include' ? 'username responses' : 'username'
+    
+        await group.populate('users', populateString) // new
+        return res.status(200).json(group)
+    } catch (err) {
+        return res.status(400).json({message: err.message})
+    }
 })
 
 

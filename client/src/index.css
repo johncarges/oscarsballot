@@ -257,6 +257,27 @@ h3 {
 }
 
 
+/* GROUP BALLOT */
+
+.group-ballot-nominee {
+  border-top: 1px solid #aaa;
+  box-sizing: border-box;
+  padding: 1rem;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.group-ballot-nominee div {
+  width:60%;
+}
+.group-ballot-nominee p {
+  width:30%;
+  text-align: right;
+}
+
+
 /* GROUP PAGE */
 
 .groups-page {
@@ -284,6 +305,18 @@ h3 {
 .group-name {
   font-style:italic;
 }
+
+.share-box {
+  display: flex;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding-bottom: .5rem;
+  margin-bottom: .5rem;
+}
+
 
 .group-tile table {
   width: 100%
