@@ -10,7 +10,6 @@ const Group = require('./models/group.model.js')
 const sortAwards  = require('./utils/sortAwards.js')
 
 require('dotenv').config()
-// console.log(process.env.CONNECTION_STRING)
 
 const app = express()
 app.use(express.urlencoded({extended: true}))
