@@ -90,6 +90,35 @@ export default function Auth() {
         setLoading(false)
     }
     
+    const onDemoLogin = async (e) => {
+        e.preventDefault()
+        setLoading(true)
+
+        const body = JSON.stringify({'username':'demo1', 'password': 'demo1'})
+
+        const res = await fetch(`https://server.oscarsballot.com/api/users/login`, { 
+            method: "POST",
+            body: body,
+            headers: {
+                "content-type":"application/json",
+                "accepts":"application/json",
+                'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key',
+                'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, OPTIONS' 
+            },
+            credentials: 'include'
+        })
+        if (!res.ok) {
+            setLoading(false)
+            const message = await res.json()
+            setLoginError(message.message)
+            return null
+        }
+        const data = await res.json()
+        navigate(destination)
+        
+    }
+
+    
 
     const buttonStyle = loading ? {color:'grey'} : {}
     const formStyle = loading ? {opacity: '40%'} : {}
@@ -106,6 +135,7 @@ export default function Auth() {
                     <input name='loginPassword' placeholder="Password" type='password' value={formData.loginPassword}/>
                     <button type='submit' style={buttonStyle} disabled={loading}>Log In</button>
                 </form>
+                <button className='demo-login' onClick={onDemoLogin}>Demo Login</button>
                 <h2>New User?</h2>
                 {signupError && <p className='error-message'>{signupError}</p> }
                 <form style={formStyle} name='signup' onChange={onChange} onSubmit={onSignup} >
